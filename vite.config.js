@@ -67,18 +67,12 @@ function moveScriptToBottom(html) {
                 html.substring(headEnd, html.length);
   
   // 4. 在 body 底部或指定位置插入指令碼
-  const insertPointIndex = newHtml.indexOf('<!-- # INSERT SCRIPT HERE -->');
-  if (insertPointIndex !== -1) {
-    // 在指定插入點插入
-    newHtml = newHtml.replace('<!-- # INSERT SCRIPT HERE -->', scripts.join('\n'));
-  } else {
-    // 在 body 標籤結束前插入
-    const bodyEndIndex = newHtml.lastIndexOf('</body>');
-    if (bodyEndIndex !== -1) {
-      newHtml = newHtml.substring(0, bodyEndIndex) + 
-               '\n' + scripts.join('\n') + '\n' + 
-               newHtml.substring(bodyEndIndex);
-    }
+  // 在 body 標籤結束前插入
+  const bodyEndIndex = newHtml.lastIndexOf('</body>');
+  if (bodyEndIndex !== -1) {
+    newHtml = newHtml.substring(0, bodyEndIndex) + 
+             '\n' + scripts.join('\n') + '\n' + 
+             newHtml.substring(bodyEndIndex);
   }
   
   return newHtml;
@@ -112,11 +106,11 @@ export default {
   build: {
     rollupOptions: {
       output: {
-        entryFileNames: 'js/[name].min.js',
-        chunkFileNames: 'js/[name].min.js',
+        entryFileNames: 'js/[name].js',
+        chunkFileNames: 'js/[name].js',
         assetFileNames: ({ name }) => {
           if (name?.endsWith('.css')) {
-            return 'css/[name].min[extname]';
+            return 'css/[name][extname]';
           }
           if (name?.match(/\.(png|jpe?g|svg|gif|webp)$/)) {
             return 'images/[name][extname]';
