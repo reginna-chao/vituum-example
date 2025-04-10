@@ -1,6 +1,8 @@
 import vituum from "vituum";
 import pages from 'vituum/plugins/pages.js'
 import pug from "@vituum/vite-plugin-pug";
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
+import path from 'path';
 
 const isProd = process.env.NODE_ENV === 'production';
 const timestamp = new Date().getTime();
@@ -100,6 +102,12 @@ export default {
       }
     }),
     htmlTransformPlugin(),
+    createSvgIconsPlugin({
+      iconDirs: [path.resolve(process.cwd(), 'src/assets/icons')],
+      symbolId: 'icon-[name]',
+      inject: 'body-last', // 插入 <body> 最後
+      customDomId: '__svg__icons__dom__' // 你可以自己命名這個 ID
+    })
   ],
   build: {
     rollupOptions: {

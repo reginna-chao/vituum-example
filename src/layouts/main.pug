@@ -4,11 +4,15 @@ html(lang="en")
     meta(charset="utf-8")
     meta(name="viewport" content="width=device-width")
     title=title
-    link(rel="stylesheet" href="/src/styles/all.scss")
+    link(rel="stylesheet" href="/src/styles/main.scss")
   body 
     h1=title
     include ../components/nav.pug
     img(src="/src/assets/logo.svg" style="max-width: 400px")
-    script(src="/src/scripts/all.js" type="module")
+    svg.icon(width='24' height='24')
+      use(xlink:href='#icon-arrow-up')
+
+
+    script(src="/src/scripts/main.js" type="module")
     |
     | <!-- # INSERT SCRIPT HERE -->
