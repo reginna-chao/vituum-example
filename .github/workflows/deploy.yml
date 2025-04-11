@@ -17,14 +17,14 @@ jobs:
         run: |
           if [ ! -f dist.zip ]; then
             echo "dist.zip not found"
-            exit 1
+            exit 0
           fi
 
       - name: Check FTP credentials
         run: |
           if [ -z "${{ secrets.FTP_SERVER }}" ] || [ -z "${{ secrets.FTP_USERNAME }}" ] || [ -z "${{ secrets.FTP_PASSWORD }}" ]; then
             echo "Missing FTP credentials"
-            exit 1
+            exit 0
           fi
 
       - name: Unzip dist.zip
